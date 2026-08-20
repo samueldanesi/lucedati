@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucedati — Software house: gestionali, app, data science, consulenza IT</title>
+<meta name="description" content="Sviluppo software su misura per aziende: gestionali personalizzati, app cross-platform, data science, siti e consulenza informatica. Un solo interlocutore per ogni esigenza tecnica.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F0E4;
+    --paper-deep:#EAE7D8;
+    --rule:#C9D6C3;
+    --rule-soft:#DAE3D5;
+    --ink:#1F2A24;
+    --ink-soft:#3B453F;
+    --muted:#5B6B63;
+    --amber:#E8A33D;
+    --amber-deep:#C97F1E;
+    --white:#FFFDF8;
+    --max:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--ink);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--amber-deep); outline-offset:3px;}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(242,240,228,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--rule);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    font-family:'Fraunces',serif;
+    font-size:1.35rem;
+    font-weight:600;
+    display:flex; align-items:baseline; gap:2px;
+  }
+  .logo .dot{color:var(--amber-deep);}
+  .navlinks{display:flex; gap:36px; font-size:0.95rem; font-weight:500;}
+  .navlinks a{text-decoration:none; color:var(--ink-soft); transition:color .15s;}
+  .navlinks a:hover{color:var(--amber-deep);}
+  .nav-cta{
+    background:var(--ink);
+    color:var(--paper);
+    padding:11px 22px;
+    border-radius:3px;
+    text-decoration:none;
+    font-size:0.9rem;
+    font-weight:600;
+    transition:background .15s;
+  }
+  .nav-cta:hover{background:var(--amber-deep);}
+  .navlinks-mobile{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 64px;
+    position:relative;
+    overflow:hidden;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:0.78rem;
+    color:var(--amber-deep);
+    font-weight:600;
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 5.2vw, 4.1rem);
+    line-height:1.06;
+    max-width:15ch;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--amber-deep);
+  }
+  .hero-sub{
+    margin-top:26px;
+    font-size:1.18rem;
+    color:var(--ink-soft);
+    max-width:46ch;
+  }
+  .hero-ctas{
+    margin-top:38px;
+    display:flex; gap:16px; flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--amber-deep);
+    color:var(--white);
+    padding:15px 30px;
+    border-radius:3px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.98rem;
+    display:inline-block;
+    transition:transform .15s, box-shadow .15s;
+    box-shadow:0 1px 0 rgba(0,0,0,0.1);
+  }
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(201,127,30,0.28);}
+  .btn-secondary{
+    background:transparent;
+    color:var(--ink);
+    padding:15px 26px;
+    border:1px solid var(--ink);
+    border-radius:3px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.98rem;
+    display:inline-block;
+    transition:background .15s, color .15s;
+  }
+  .btn-secondary:hover{background:var(--ink); color:var(--paper);}
+
+  /* ---------- Signature: scattered -> ledger ---------- */
+  .ledger-demo{
+    margin-top:72px;
+    position:relative;
+    border:1px solid var(--rule);
+    background:var(--white);
+    border-radius:4px;
+    padding:36px 40px 30px;
+    overflow:hidden;
+  }
+  .ledger-demo::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(115deg, transparent 40%, rgba(232,163,61,0.16) 48%, rgba(232,163,61,0.35) 52%, transparent 60%);
+    background-size:220% 220%;
+    animation:sweep 6s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes sweep{
+    0%{background-position:130% 0%;}
+    45%{background-position:-10% 100%;}
+    100%{background-position:-10% 100%;}
+  }
+  .ledger-row{
+    display:grid;
+    grid-template-columns: 1fr auto auto;
+    gap:24px;
+    align-items:baseline;
+    padding:13px 0;
+    border-bottom:1px solid var(--rule-soft);
+    font-size:0.98rem;
+  }
+  .ledger-row:last-child{border-bottom:none;}
+  .ledger-row .label{color:var(--ink-soft); font-weight:500;}
+  .ledger-row .delta{font-family:'IBM Plex Mono',monospace; font-size:0.85rem; color:var(--muted); min-width:64px; text-align:right;}
+  .ledger-row .val{font-family:'IBM Plex Mono',monospace; font-weight:600; min-width:88px; text-align:right;}
+  .ledger-row.lit .val{color:var(--amber-deep);}
+  .ledger-caption{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:18px; padding-top:16px; border-top:1px dashed var(--rule);
+    font-size:0.8rem; color:var(--muted); font-family:'IBM Plex Mono',monospace;
+  }
+  .ai-query, .ai-answer{padding:16px 0; border-bottom:1px solid var(--rule-soft);}
+  .ai-answer{border-bottom:none;}
+  .ai-tag{
+    display:inline-block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--muted); margin-bottom:8px;
+  }
+  .ai-tag.lit{color:var(--amber-deep); font-weight:600;}
+  .ai-query p{margin:0; font-family:'Fraunces',serif; font-style:italic; font-size:1.1rem; color:var(--ink);}
+  .ai-answer p{margin:0; font-size:0.98rem; color:var(--ink-soft); line-height:1.55;}
+
+  /* ---------- SECTIONS shared ---------- */
+  section{padding:88px 0;}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head .eyebrow{margin-bottom:16px;}
+  .section-head h2{font-size:clamp(1.9rem, 3.4vw, 2.6rem); line-height:1.15;}
+  .section-head p{margin-top:16px; color:var(--muted); font-size:1.05rem;}
+
+  /* ---------- PROBLEM ---------- */
+  .problem{background:var(--paper-deep); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);}
+  .problem-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--rule); background:var(--white); border-radius:4px; overflow:hidden;}
+  .problem-item{padding:34px 30px; border-right:1px solid var(--rule);}
+  .problem-item:last-child{border-right:none;}
+  .problem-item .qmark{font-family:'Fraunces',serif; font-size:2.2rem; color:var(--rule); line-height:1; margin-bottom:14px; font-style:italic;}
+  .problem-item h3{font-size:1.05rem; margin-bottom:10px;}
+  .problem-item p{color:var(--muted); font-size:0.94rem; margin:0;}
+
+  /* ---------- SERVIZI ---------- */
+  .servizi-list{display:flex; flex-direction:column; border-top:1px solid var(--rule);}
+  .servizio-row{
+    display:grid;
+    grid-template-columns: 90px 1fr 260px;
+    gap:32px;
+    padding:36px 0;
+    border-bottom:1px solid var(--rule);
+    align-items:start;
+  }
+  .servizio-row .num{font-family:'IBM Plex Mono',monospace; color:var(--amber-deep); font-weight:600; font-size:1.05rem;}
+  .servizio-row h3{font-size:1.35rem; margin-bottom:10px;}
+  .servizio-row p{color:var(--muted); margin:0; font-size:0.98rem; max-width:52ch;}
+  .servizio-tags{display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start;}
+  .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:0.76rem;
+    padding:5px 10px; border:1px solid var(--rule); border-radius:20px; color:var(--muted);
+    white-space:nowrap;
+  }
+
+  /* ---------- COME FUNZIONA ---------- */
+  .come{background:var(--ink); color:var(--paper);}
+  .come .section-head p{color:#9FB0A6;}
+  .come .eyebrow{color:var(--amber);}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:36px;}
+  .step{border-top:2px solid var(--amber); padding-top:22px;}
+  .step .num{font-family:'IBM Plex Mono',monospace; color:var(--amber); font-size:0.85rem; display:block; margin-bottom:14px;}
+  .step h3{color:var(--paper); font-size:1.2rem; margin-bottom:10px;}
+  .step p{color:#B7C3BC; margin:0; font-size:0.95rem;}
+
+  /* ---------- CASO STUDIO ---------- */
+  .caso{
+    border:1px solid var(--rule);
+    background:var(--white);
+    border-radius:4px;
+    padding:48px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+  }
+  .caso-badge{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.75rem;
+    color:var(--amber-deep); border:1px solid var(--amber-deep); padding:4px 10px; border-radius:20px; margin-bottom:18px;
+  }
+  .caso h3{font-size:1.6rem; margin-bottom:16px; line-height:1.25;}
+  .caso p{color:var(--muted); font-size:1rem;}
+  .caso-stat{
+    background:var(--paper-deep); border:1px solid var(--rule); border-radius:4px; padding:28px;
+  }
+  .caso-stat .big{font-family:'IBM Plex Mono',monospace; font-size:2.6rem; font-weight:600; color:var(--amber-deep); display:block; line-height:1;}
+  .caso-stat .cap{color:var(--muted); font-size:0.88rem; margin-top:8px; display:block;}
+
+  /* ---------- CHI SIAMO ---------- */
+  .team{display:grid; grid-template-columns:repeat(2,1fr); gap:32px;}
+  .person{border:1px solid var(--rule); background:var(--white); border-radius:4px; padding:32px;}
+  .person .avatar{
+    width:52px; height:52px; border-radius:50%;
+    background:var(--ink); color:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:600; font-size:1.2rem;
+    margin-bottom:20px;
+  }
+  .person h3{font-size:1.15rem; margin-bottom:4px;}
+  .person .role{font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--amber-deep); margin-bottom:14px; display:block;}
+  .person p{color:var(--muted); font-size:0.94rem; margin:0;}
+
+  /* ---------- PARTNER ---------- */
+  .partner{background:var(--paper-deep); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);}
+  .partner-inner{display:grid; grid-template-columns:1.2fr 0.8fr; gap:48px; align-items:center;}
+  .partner h2{font-size:clamp(1.7rem,3vw,2.2rem); line-height:1.2;}
+  .partner p{color:var(--muted); margin-top:16px; font-size:1.02rem; max-width:52ch;}
+  .partner-card{background:var(--white); border:1px solid var(--rule); border-radius:4px; padding:28px;}
+  .partner-card ul{margin:0; padding:0; list-style:none;}
+  .partner-card li{
+    display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--rule-soft); font-size:0.94rem;
+  }
+  .partner-card li:last-child{border-bottom:none;}
+  .partner-card li::before{content:"→"; color:var(--amber-deep); font-weight:700;}
+
+  /* ---------- CONTATTI ---------- */
+  .contatti-inner{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px;}
+  .contatti-info h2{font-size:clamp(1.9rem,3.4vw,2.6rem); margin-bottom:18px;}
+  .contatti-info p{color:var(--muted); font-size:1.02rem; margin-bottom:28px;}
+  .contact-line{display:flex; gap:12px; align-items:baseline; margin-bottom:12px; font-size:0.98rem;}
+  .contact-line .k{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--amber-deep); text-transform:uppercase; letter-spacing:.06em; min-width:80px;}
+  form{background:var(--white); border:1px solid var(--rule); border-radius:4px; padding:36px;}
+  .field{margin-bottom:20px;}
+  .field label{display:block; font-size:0.85rem; font-weight:600; margin-bottom:8px; color:var(--ink-soft);}
+  .field input, .field textarea{
+    width:100%; padding:13px 14px; border:1px solid var(--rule); border-radius:3px;
+    background:var(--paper); font-family:'Inter',sans-serif; font-size:0.96rem; color:var(--ink);
+  }
+  .field textarea{resize:vertical; min-height:100px;}
+  .field input:focus, .field textarea:focus{outline:none; border-color:var(--amber-deep); background:var(--white);}
+  .submit-btn{
+    width:100%; background:var(--amber-deep); color:var(--white); border:none; padding:15px; border-radius:3px;
+    font-weight:600; font-size:1rem; cursor:pointer; transition:background .15s;
+    font-family:'Inter',sans-serif;
+  }
+  .submit-btn:hover{background:var(--ink);}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--rule); padding:40px 0;}
+  .footer-inner{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .footer-inner .logo{font-size:1.1rem;}
+  footer .fine{color:var(--muted); font-size:0.85rem; font-family:'IBM Plex Mono',monospace;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .navlinks{display:none;}
+    .problem-grid{grid-template-columns:1fr;}
+    .problem-item{border-right:none; border-bottom:1px solid var(--rule);}
+    .problem-item:last-child{border-bottom:none;}
+    .servizio-row{grid-template-columns:1fr; gap:14px;}
+    .steps{grid-template-columns:1fr; gap:28px;}
+    .caso{grid-template-columns:1fr; padding:32px;}
+    .team{grid-template-columns:1fr;}
+    .partner-inner{grid-template-columns:1fr;}
+    .contatti-inner{grid-template-columns:1fr;}
+    .ledger-row{grid-template-columns:1fr auto; font-size:0.88rem;}
+    .ledger-row .delta{display:none;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .ledger-demo::before{animation:none; background-position:0 0;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">Lucedati<span class="dot">.</span></div>
+    <div class="navlinks">
+      <a href="#servizi">Servizi</a>
+      <a href="#come-funziona">Come lavoriamo</a>
+      <a href="#caso-studio">Casi reali</a>
+    </div>
+    <a href="#contatti" class="nav-cta">Parliamone</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Software house per aziende</p>
+      <h1>Un solo interlocutore per <em>ogni</em> esigenza tecnica.</h1>
+      <p class="hero-sub">Gestionali personalizzati, app cross-platform, siti web, data science e consulenza informatica: costruiamo il software che serve alla vostra azienda, senza doverlo spiegare a fornitori diversi ogni volta.</p>
+      <div class="hero-ctas">
+        <a href="#contatti" class="btn-primary">Parla con noi</a>
+        <a href="#servizi" class="btn-secondary">Cosa facciamo</a>
+      </div>
+
+      <div class="ledger-demo">
+        <div class="ai-query">
+          <span class="ai-tag mono">Domanda</span>
+          <p>"Quali clienti stanno rallentando i pagamenti questo mese?"</p>
+        </div>
+        <div class="ai-answer">
+          <span class="ai-tag mono lit">Risposta del sistema</span>
+          <p>L'assistente legge i vostri dati in tempo reale e risponde in linguaggio semplice, direttamente dentro il gestionale — senza dover cercare o incrociare fogli a mano.</p>
+        </div>
+        <div class="ledger-caption">
+          <span>Intelligenza artificiale integrata nei vostri sistemi</span>
+          <span>lucedati / AI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Il problema che risolviamo</p>
+        <h2>Il gestionale c'è. I dati non parlano.</h2>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-item">
+          <div class="qmark">"</div>
+          <h3>Ogni report è manuale</h3>
+          <p>Qualcuno passa ore ogni mese a copiare numeri da un sistema all'altro per capire come sta andando l'azienda.</p>
+        </div>
+        <div class="problem-item">
+          <div class="qmark">"</div>
+          <h3>Le decisioni arrivano tardi</h3>
+          <p>Il calo di un margine, un cliente che rallenta i pagamenti: lo si scopre quando è già un problema, non prima.</p>
+        </div>
+        <div class="problem-item">
+          <div class="qmark">"</div>
+          <h3>Il gestionale è vecchio</h3>
+          <p>Fa il suo lavoro, ma non è mai stato pensato per dare risposte chiare a chi guida l'azienda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIZI -->
+  <section id="servizi">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Cosa costruiamo</p>
+        <h2>Cinque aree, un solo team a cui rivolgersi</h2>
+        <p>Partiamo sempre da quello che avete già — nessun sistema da buttare, nessuna migrazione forzata.</p>
+      </div>
+      <div class="servizi-list">
+        <div class="servizio-row">
+          <span class="num mono">01</span>
+          <div>
+            <h3>Gestionali personalizzati</h3>
+            <p>Se il sistema attuale è ormai un limite, costruiamo un gestionale pensato per come lavorate davvero, non il contrario — con dashboard e report collegati ai vostri dati reali.</p>
+          </div>
+          <div class="servizio-tags">
+            <span class="tag">su misura</span>
+            <span class="tag">integrabile</span>
+          </div>
+        </div>
+        <div class="servizio-row">
+          <span class="num mono">02</span>
+          <div>
+            <h3>App cross-platform</h3>
+            <p>Applicazioni mobile per iOS e Android da un'unica base di codice — per i vostri clienti interni o esterni, senza raddoppiare tempi e costi di sviluppo.</p>
+          </div>
+          <div class="servizio-tags">
+            <span class="tag">iOS</span>
+            <span class="tag">Android</span>
+          </div>
+        </div>
+        <div class="servizio-row">
+          <span class="num mono">03</span>
+          <div>
+            <h3>Sviluppo web</h3>
+            <p>Siti, portali ed e-commerce costruiti per durare — veloci, chiari, facili da aggiornare, senza dover ripartire da zero a ogni piccola modifica.</p>
+          </div>
+          <div class="servizio-tags">
+            <span class="tag">siti</span>
+            <span class="tag">e-commerce</span>
+            <span class="tag">portali</span>
+          </div>
+        </div>
+        <div class="servizio-row">
+          <span class="num mono">04</span>
+          <div>
+            <h3>Data science</h3>
+            <p>Dai dati che già avete a previsioni, automazioni e un assistente che risponde in linguaggio semplice alle domande che contano davvero per l'azienda.</p>
+          </div>
+          <div class="servizio-tags">
+            <span class="tag">AI</span>
+            <span class="tag">previsioni</span>
+            <span class="tag">automazioni</span>
+          </div>
+        </div>
+        <div class="servizio-row">
+          <span class="num mono">05</span>
+          <div>
+            <h3>Consulenza informatica</h3>
+            <p>Non sapete da dove iniziare o cosa serva davvero alla vostra azienda? Ne parliamo insieme, senza vendervi qualcosa che non vi serve.</p>
+          </div>
+          <div class="servizio-tags">
+            <span class="tag">consulenza</span>
+            <span class="tag">strategia IT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COME FUNZIONA -->
+  <section class="come" id="come-funziona">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Come lavoriamo</p>
+        <h2>Tre passaggi, senza sorprese</h2>
+        <p>Partiamo da una conversazione, non da un contratto.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="num mono">Passaggio 1</span>
+          <h3>Ascoltiamo</h3>
+          <p>Una call per capire cosa guardate oggi, cosa vi manca, e quali numeri contano davvero per voi.</p>
+        </div>
+        <div class="step">
+          <span class="num mono">Passaggio 2</span>
+          <h3>Costruiamo</h3>
+          <p>Colleghiamo i vostri dati e costruiamo la dashboard o il modulo, con un primo risultato da guardare in poche settimane.</p>
+        </div>
+        <div class="step">
+          <span class="num mono">Passaggio 3</span>
+          <h3>Restiamo al vostro fianco</h3>
+          <p>Aggiornamenti, nuove richieste, manutenzione: il rapporto continua dopo la consegna, non si chiude lì.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASO STUDIO -->
+  <section id="caso-studio">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Casi reali</p>
+        <h2>Un esempio concreto</h2>
+      </div>
+      <div class="caso">
+        <div>
+          <span class="caso-badge">Settore manifatturiero</span>
+          <h3>Da un gestionale datato a una dashboard che si aggiorna da sola.</h3>
+          <p>Un'azienda con anni di storia, un gestionale che funzionava ma non parlava più con nessuno: dati chiusi lì dentro, report fatti a mano ogni fine mese. Abbiamo collegato i dati esistenti a una dashboard chiara, senza toccare quello che già funzionava.</p>
+        </div>
+        <div class="caso-stat">
+          <span class="big mono">0 → 1</span>
+          <span class="cap">report manuale mensile eliminato, sostituito da dati sempre aggiornati</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section id="contatti">
+    <div class="wrap contatti-inner">
+      <div class="contatti-info">
+        <h2>Raccontateci a che punto siete.</h2>
+        <p>Iniziamo da una conversazione — senza impegno.</p>
+        <div class="contact-line"><span class="k mono">Email</span> info@lucedati.com</div>
+      </div>
+      <form onsubmit="return false;">
+        <div class="field">
+          <label for="nome">Nome</label>
+          <input id="nome" type="text" placeholder="Come ti chiami" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="nome@azienda.it" required>
+        </div>
+        <div class="field">
+          <label for="msg">Di cosa avete bisogno?</label>
+          <textarea id="msg" placeholder="Raccontaci la situazione in poche righe"></textarea>
+        </div>
+        <button class="submit-btn" type="submit">Invia messaggio</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="logo">Lucedati<span class="dot">.</span></div>
+    <span class="fine">© 2026 Lucedati — Dashboard e gestionali per PMI</span>
+  </div>
+</footer>
+
+</body>
+</html>
