@@ -542,21 +542,54 @@
         <p>Iniziamo da una conversazione — senza impegno.</p>
         <div class="contact-line"><span class="k mono">Email</span> info@lucedati.com</div>
       </div>
-      <form onsubmit="return false;">
+      <form id="contact-form" action="https://formspree.io/f/xwlezkaz" method="POST">
         <div class="field">
           <label for="nome">Nome</label>
-          <input id="nome" type="text" placeholder="Come ti chiami" required>
+          <input id="nome" name="name" type="text" placeholder="Come ti chiami" required>
         </div>
         <div class="field">
           <label for="email">Email</label>
-          <input id="email" type="email" placeholder="nome@azienda.it" required>
+          <input id="email" name="email" type="email" placeholder="nome@azienda.it" required>
         </div>
         <div class="field">
           <label for="msg">Di cosa avete bisogno?</label>
-          <textarea id="msg" placeholder="Raccontaci la situazione in poche righe"></textarea>
+          <textarea id="msg" name="message" placeholder="Raccontaci la situazione in poche righe"></textarea>
         </div>
+        <input type="hidden" name="_subject" value="Nuovo contatto dal sito Lucedati">
         <button class="submit-btn" type="submit">Invia messaggio</button>
+        <p id="form-status" style="margin:14px 0 0; font-size:0.9rem; display:none;"></p>
       </form>
+      <script>
+        (function () {
+          var form = document.getElementById('contact-form');
+          var status = document.getElementById('form-status');
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            status.style.display = 'block';
+            status.style.color = 'var(--muted)';
+            status.textContent = 'Invio in corso…';
+            fetch(form.action, {
+              method: 'POST',
+              body: new FormData(form),
+              headers: { 'Accept': 'application/json' },
+            })
+              .then(function (res) {
+                if (res.ok) {
+                  status.style.color = 'var(--amber-deep)';
+                  status.textContent = 'Grazie! Ti risponderemo il prima possibile.';
+                  form.reset();
+                } else {
+                  status.style.color = '#B3261E';
+                  status.textContent = 'Errore nell\'invio. Scrivi a info@lucedati.com.';
+                }
+              })
+              .catch(function () {
+                status.style.color = '#B3261E';
+                status.textContent = 'Errore nell\'invio. Scrivi a info@lucedati.com.';
+              });
+          });
+        })();
+      </script>
     </div>
   </section>
 
